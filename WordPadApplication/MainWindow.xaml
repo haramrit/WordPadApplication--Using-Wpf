@@ -6,7 +6,57 @@
         xmlns:local="clr-namespace:WordPadApplication"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top" HorizontalAlignment="Left" Background="White" BorderBrush="Black">
+            <MenuItem Header="_File">
+                <Separator/>
+                <MenuItem Header="_Exit" MouseEnter="MenuItem_MouseEnter" MouseLeave="MenuItem_MouseLeave" Click="MenuItem_Click"/>
+            </MenuItem>
+            <MenuItem Header="_Edit" MouseEnter="MenuItem_MouseEnter" MouseLeave="MenuItem_MouseLeave" Click="MenuItem_Click" >
+                <MenuItem Command="ApplicationCommands.Copy"/>
+                <MenuItem Command="ApplicationCommands.Cut"/>
+                <MenuItem Command="ApplicationCommands.Paste"/>
+            </MenuItem>
+            <MenuItem Header="_Tools">
+                <MenuItem Header="_Spelling Hints" MouseEnter="MenuItem_MouseEnter_1" MouseLeave="MenuItem_MouseLeave_1" Click="MenuItem_Click_1"/>
+            </MenuItem>
+        </Menu>
+
+        <!-- Put a toolbar under the Menu -->
+        <ToolBar DockPanel.Dock="Top">
+            <Button Content="Exit" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="MenuItem_Click"/>
+            <Separator/>
+                <Button Content="Check" MouseEnter="Button_MouseEnter_1" MouseLeave="Button_MouseLeave_1" Click="MenuItem_Click_1" Cursor="Help"/>
+            </ToolBar>
         
-    </Grid>
+        <StatusBar DockPanel.Dock="Bottom" Background="Beige">
+            <StatusBarItem>
+                <TextBlock Name="statBarText" Text="Ready"/>
+            </StatusBarItem>
+        </StatusBar>
+        <Grid DockPanel.Dock="Left" Background="AliceBlue">
+            <!-- Define the rows-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <GridSplitter Grid.Column="0" Width="5" Background="Gray"/>
+            <StackPanel Grid.Column="0" VerticalAlignment="Stretch">
+                <Label Name="lblSpellingInstructions" FontSize="14" Margin="10 10 0 0">
+                    Spelling Hints
+                </Label>
+                <Expander Name="expanderSpelling" Header="Try These!" Margin="10 10 10 10">
+                    <!-- This will be filled programatically -->
+                    <Label Name="lblSpellingHints" FontSize="12"/>
+                </Expander>
+            </StackPanel>
+            <TextBox Grid.Column="1" SpellCheck.IsEnabled="True" Name="txtData" FontSize="14"
+                     BorderBrush="Blue" 
+                     VerticalScrollBarVisibility="Auto" 
+                     HorizontalScrollBarVisibility="Auto" >
+
+            </TextBox>
+        </Grid>
+
+    </DockPanel>
 </Window>
